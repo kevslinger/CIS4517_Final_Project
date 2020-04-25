@@ -42,8 +42,10 @@ def main(args):
     #df.to_csv('/Users/kevin/Desktop/test_concat_df.csv', index=False)
     for path in glob.glob(os.path.join(args.data_dir, '*.csv')):
         df = pd.read_csv(path)
+        print("Read in " + path.split('/')[-1])
         df = remove_duplicates(df)
         df.to_csv(os.path.join(args.output_dir, path.split('/')[-1]), index=False)
+        print("Wrote " + path.split('/')[-1])
         del df
 
 if __name__ == '__main__':
