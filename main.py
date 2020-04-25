@@ -29,7 +29,7 @@ def read_tweets(data_dir):
     return df
 
 def remove_duplicates(df, output_path):
-    df.drop_duplicates(subset='id', keep=False, inplace=True)
+    df.drop_duplicates(subset='id', keep='first', ignore_index=True, inplace=True)
     return df
 
 def main(args):
