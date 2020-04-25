@@ -40,7 +40,7 @@ def remove_RT(df):
 def main(args):
     #df = read_tweets(args.data_dir)
     #df.to_csv('/Users/kevin/Desktop/test_concat_df.csv', index=False)
-    for path in glob.glob(os.path.join(data_dir, '*.csv')):
+    for path in glob.glob(os.path.join(args.data_dir, '*.csv')):
         df = pd.read_csv(path)
         df = remove_duplicates(df)
         df.to_csv(os.path.join(args.output_dir, path.split('/')[-1]), index=False)
