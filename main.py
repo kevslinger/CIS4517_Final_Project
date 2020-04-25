@@ -28,16 +28,21 @@ def read_tweets(data_dir):
 
     return df
 
-def remove_duplicates(df, output_path):
+def remove_duplicates(df):
     df.drop_duplicates(subset='id', keep='first', ignore_index=True, inplace=True)
     return df
 
+def remove_RT(df):
+    is_RT = df[df['full_text'][:2] == 'RT']
+
+
+    
 def main(args):
     #df = read_tweets(args.data_dir)
     #df.to_csv('/Users/kevin/Desktop/test_concat_df.csv', index=False)
     df = pd.read_csv('output/combined_df.csv', low_memory=False)
-    df = remove_duplicates(df, args.output_dir)
-    df.to_csv('output/duplicates_dropped.csv', index=False)
+    df = remove_duplicates(df)
+    df.to_csv(os.path.join(args.output_dir, 'duplicates_dropped.csv'), index=False)
 
 
 if __name__ == '__main__':
