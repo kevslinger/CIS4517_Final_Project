@@ -58,7 +58,7 @@ def main(args):
         df.to_csv(os.path.join(args.output_dir, "deduped_" + path.split('/')[-1]), index=False)
         print("Wrote " + path.split('/')[-1])
         df = remove_RT(df)
-        df.to_csv(os.path.join(args.output_dir, "removed_RT_" + path.split('/')[-1], index=False))
+        df.to_csv(os.path.join(args.output_dir, "removed_RT_" + path.split('/')[-1]), index=False)
         del df
 
 if __name__ == '__main__':
