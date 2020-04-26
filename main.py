@@ -37,6 +37,7 @@ def remove_duplicates(df):
     return df
 
 def remove_RT(df):
+    df['full_text'].fillna('', inplace=True)
     is_RT = df[df['full_text'].str.startswith("RT ")]
     df.drop(is_RT.index, axis=0, inplace=True)
     return df
