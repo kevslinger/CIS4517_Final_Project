@@ -11,7 +11,6 @@ import time
 def read_tweets(data_dir):
     file_list = glob.glob(os.path.join(data_dir, '*.csv'))
     df = pd.concat([pd.read_csv(file_list[i], low_memory=False) for i in range(len(file_list))], ignore_index=True)
-
     return df
 
 # Remove lines in the dataFrame with the same tweet ID
