@@ -4,24 +4,6 @@ import glob
 import os
 import time
 
-# Do we want to remove all RTs?
-# Definitely want to filter by Tweet ID -- keep a set of unique Tweet IDs
-# Probably just append all the CSVs together since they have the same attributes.
-# do NOT drop any attributes
-# Does Dragut just want us to keep it in JSON? No, can be CSV
-# Is storing in a dataframe the most efficient option?
-
-# STEPS FOR THIS PROJECT
-# STEP 1: Define the steps you will take to clean
-#   e.g. Step 1.) Remove all duplicate keys from your data.
-#        Step 2.) Remove RTs (potentially tweets that specifically start with the text "RT")
-#        Step 3.) Remove RTs (potentially using the retweet attributes? Not sure if those will help or not.)
-# STEP 2: SAVE your dataset at each step of the process
-#   e.g. "Here is my raw dataset <link>
-#        "After removing duplicate tweet_ids, my dataset became <link>
-#        "Then, I removed retweets by removing tweets that started with RT. Here is my new dataset <link>"
-# DO NOT DELETE OR REMOVE ANY DATA/ATTRIBUTES
-# STEP 3: Write a report (sample given in step 2), documenting each step you took to clean the data.
 
 # Read a directory for all CSV files, and concatenate them into one DataFrame
 # NOTE: Your computer might not be able to handle this!! That's why it's commented out in main.
@@ -32,13 +14,15 @@ def read_tweets(data_dir):
 
     return df
 
+# Remove lines in the dataFrame with the same tweet ID
 def remove_duplicates(df):
     df.drop_duplicates(subset='id', keep='first', ignore_index=True, inplace=True)
     return df
 
+# Remove lines in the dataFrame that start with text "RT @" 
 def remove_RT(df):
     df['full_text'].fillna('', inplace=True)
-    is_RT = df[df['full_text'].str.startswith("RT ")]
+    is_RT = df[df['full_text'].str.startswith("RT @")]
     df.drop(is_RT.index, axis=0, inplace=True)
     return df
 
